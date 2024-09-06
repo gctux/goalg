@@ -25,5 +25,8 @@ func main() {
 		return
 	}
 	fmt.Println("Summe von a und b:", a+b)
+	fmt.Println("Differenz von a und b:", a-b)
+	fmt.Println("Produkt von a und b:", a*b)
+	fmt.Println("Quotient von a und b:", a/b)
 
 }
