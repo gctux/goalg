@@ -5,16 +5,10 @@ Ein Marathonläufer (42,195 km) möchte eine bestimmte Endzeit laufen (z.B. 3 St
 
 Möglicher Programmablauf:
 
-Eingabe der Endzeit
-Stunden: 3
-Minuten: 35
-Sekunden: 30
+Eingabe der Endzeit: 3:35:10
 Teilstrecke: 10
 
-Zwischenzeit
-Stunden: 0
-Minuten: 51
-Sekunden: 4
+Zwischenzeit: 0:51:04
 */
 package main
 
@@ -29,10 +23,12 @@ import (
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Eingabe der Endzeit\n")
-	fmt.Print("Stunden: ")
-	eStundenStr, _ := reader.ReadString('\n')
-	eStunden, err := strconv.Atoi(strings.TrimSpace(eStundenStr))
+	fmt.Print("Eingabe der Endzeit:")
+	eZeitStr, _ := reader.ReadString('\n')
+	var eZeitList []string
+	eZeitList := strings.Split(eZeitStr, ":")
+
+	eZeitList[0], err := strconv.Atoi(strings.TrimSpace(eZeitList[0]))
 	if err != nil {
 		fmt.Println("Fehler:", err)
 		return
