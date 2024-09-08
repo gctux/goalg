@@ -23,26 +23,26 @@ import (
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Eingabe der Endzeit:")
+	fmt.Print("Eingabe der Endzeit (s:mm:ss): ")
 	eZeitStr, _ := reader.ReadString('\n')
-	var eZeitList []string
-	eZeitList := strings.Split(eZeitStr, ":")
+	var eZeitList []string = strings.Split(eZeitStr, ":")
 
-	eZeitList[0], err := strconv.Atoi(strings.TrimSpace(eZeitList[0]))
+	if len(eZeitList) != 3 {
+		fmt.Println("Falsches Zeitformat!")
+		return
+	}
+
+	eStunden, err := strconv.Atoi(strings.TrimSpace(eZeitList[0]))
 	if err != nil {
 		fmt.Println("Fehler:", err)
 		return
 	}
-	fmt.Print("Minuten: ")
-	eMinutenStr, _ := reader.ReadString('\n')
-	eMinuten, err := strconv.Atoi(strings.TrimSpace(eMinutenStr))
+	eMinuten, err := strconv.Atoi(strings.TrimSpace(eZeitList[1]))
 	if err != nil {
 		fmt.Println("Fehler:", err)
 		return
 	}
-	fmt.Print("Sekunden: ")
-	eSekundenStr, _ := reader.ReadString('\n')
-	eSekunden, err := strconv.Atoi(strings.TrimSpace(eSekundenStr))
+	eSekunden, err := strconv.Atoi(strings.TrimSpace(eZeitList[2]))
 	if err != nil {
 		fmt.Println("Fehler:", err)
 		return
@@ -60,6 +60,18 @@ func main() {
 	aMinuten := (zZeit % (60 * 60)) / 60
 	aSekunden := (zZeit % (60 * 60)) % 60
 
-	println("Zwischenzeit:", aStunden, ":", aMinuten, ":", aSekunden)
+	Zwischenzeit := strconv.Itoa(aStunden)
+	if aMinuten < 10 {
+		Zwischenzeit = Zwischenzeit + ":0" + strconv.Itoa(aMinuten)
+	} else {
+		Zwischenzeit = Zwischenzeit + ":" + strconv.Itoa(aMinuten)
+	}
+	if aSekunden < 10 {
+		Zwischenzeit = Zwischenzeit + ":0" + strconv.Itoa(aSekunden)
+	} else {
+		Zwischenzeit = Zwischenzeit + ":" + strconv.Itoa(aSekunden)
+	}
+
+	println("Zwischenzeit:", Zwischenzeit)
 
 }
